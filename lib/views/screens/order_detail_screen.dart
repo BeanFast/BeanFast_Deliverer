@@ -1,3 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
 import '/contrains/theme_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +27,6 @@ class OrderDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BannerOrderStatus(status: OrderStatus.fromInt(order.status!)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -242,6 +245,74 @@ class OrderDetailScreen extends StatelessWidget {
                             ],
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        if (true)
+                          Container(
+                            width: Get.width / 1.2,
+                            height: Get.height / 15,
+                            decoration: BoxDecoration(
+                              // gradient: const LinearGradient(
+                              //   colors: [
+                              //     Colors.grey,
+                              //     Color.fromARGB(255, 221, 221, 221)
+                              //   ],
+                              //   begin: Alignment.topLeft,
+                              //   end: Alignment.bottomRight,
+                              // ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 1,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                              //back
+                              
+                              },
+                              child: const Text('Hoàn tác đơn hàng',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.black)),
+                            ),
+                          ),
+                        // Container(
+                        //   width: Get.width / 1.2,
+                        //   height: Get.height / 15,
+                        //   decoration: BoxDecoration(
+                        //     gradient: const LinearGradient(
+                        //       colors: [
+                        //         Color.fromARGB(255, 109, 177, 121),
+                        //         Colors.green,
+                        //       ],
+                        //       begin: Alignment.topLeft,
+                        //       end: Alignment.bottomRight,
+                        //     ),
+                        //     boxShadow: [
+                        //       BoxShadow(
+                        //         color: Colors.grey.withOpacity(0.5),
+                        //         spreadRadius: 5,
+                        //         blurRadius: 7,
+                        //         offset: const Offset(0, 3),
+                        //       ),
+                        //     ],
+                        //     borderRadius: BorderRadius.circular(30),
+                        //   ),
+                        //   child: TextButton(
+                        //     onPressed: () {
+                        //       // Handle the button tap
+                        //     },
+                        //     child: const Text('Xác nhận giao hàng',
+                        //         style: TextStyle(
+                        //             fontSize: 18, color: Colors.white)),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

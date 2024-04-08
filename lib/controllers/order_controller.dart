@@ -23,7 +23,7 @@ class OrderController extends GetxController {
 
   Future getByStatus() async {
     try {
-      listData.value = await OrderService().getByStatus(orderStatus);
+     // listData.value = await OrderService().getByStatus(orderStatus);
       listData.sort((a, b) => b.paymentDate!.compareTo(a.paymentDate!));
     } catch (e) {
       throw Exception(e);
