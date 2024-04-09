@@ -12,7 +12,7 @@ class OrderService {
   final String baseUrl = 'orders';
   final ApiService _apiService = getx.Get.put(ApiService());
 
-  Future<List<Order>> getByQRCode(OrderStatus qrCodeString) async {
+  Future<List<Order>> getByQRCode(String qrCodeString) async {
     final response = await _apiService.request
         .get('$baseUrl/getOrderByQrCode?qrCode=$qrCodeString');
     List<Order> list = [];

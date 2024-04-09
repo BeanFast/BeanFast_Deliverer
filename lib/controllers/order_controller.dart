@@ -23,7 +23,8 @@ class OrderController extends GetxController {
 
   Future getByStatus() async {
     try {
-      listData.value = await OrderService().getByStatus(orderStatus);
+      String qrCode = '3e24d372-1776-4dc2-81f3-a6322317aad3';
+      listData.value = await OrderService().getByQRCode(qrCode);
       listData.sort((a, b) => b.paymentDate!.compareTo(a.paymentDate!));
     } catch (e) {
       throw Exception(e);

@@ -1,11 +1,12 @@
+import 'package:beanfast_deliverer/models/session_detail.dart';
+
 import '/models/session.dart';
 import 'package:get/get.dart' as getx;
-import 'package:intl/intl.dart';
 
 import '/services/api_service.dart';
 
 class SessionService {
-  final String baseUrl = 'Sessions';
+  final String baseUrl = 'SessionDetails';
   final ApiService _apiService = getx.Get.put(ApiService());
 
   // Future<List<Session>> getSessionsBySchoolId(
@@ -20,8 +21,12 @@ class SessionService {
   //   return list;
   // }
 
-  // Future<Session> getById(String id) async {
-  //   final response = await _apiService.request.get('$baseUrl/$id');
-  //   return Session.fromJson(response.data['data']);
-  // }
+  Future<List<SessionDetail>> getScheduleById(String delivererId) async {
+    List<SessionDetail> list = [];
+    final response = await _apiService.request.get('$baseUrl/deliveryschedule/$delivererId');
+    for (var e in response.data['data']) {
+      list.add(SessionDetail.fromJson(e));
+    }
+    return list;
+  }
 }
