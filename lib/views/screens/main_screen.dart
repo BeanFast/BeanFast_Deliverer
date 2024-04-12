@@ -29,7 +29,7 @@ class MainScreen extends StatelessWidget {
           activeIndex: selectedMenuIndex.value,
           onTap: changePage,
           icons: const [Icons.assignment_outlined, Iconsax.profile_circle],
-          gapLocation: GapLocation.none,
+          gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.defaultEdge,
           activeColor: Colors.green,
         ),
