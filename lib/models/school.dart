@@ -30,19 +30,19 @@ class School extends BaseModel {
 
   factory School.fromJson(dynamic json) {
     return School(
-      id: json['id'],
-      status: json['status'],
-      areaId: json["areaId"],
-      kitchenId: json["kitchenId"],
-      code: json['code'],
+      // id: json['id'],
+      // status: json['status'],
+      // areaId: json["areaId"],
+      // kitchenId: json["kitchenId"],
+      // code: json['code'],
       name: json['name'],
-      address: json['address'],
-      imagePath: json['imagePath'] ?? "",
-      locations: json['locations'] == null
-          ? []
-          : json['locations']?.map<Location>((item) {
-              return Location.fromJson(item);
-            }).toList(),
+      // address: json['address'],
+      // imagePath: json['imagePath'] ?? "",
+      // locations: json['locations'] == null
+      //     ? []
+      //     : json['locations']?.map<Location>((item) {
+      //         return Location.fromJson(item);
+      //       }).toList(),
     );
   }
 

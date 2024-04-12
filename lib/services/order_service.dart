@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
 
 import '../utils/logger.dart';
-import '/enums/status_enum.dart';
 import '/models/food.dart';
 import '/models/order.dart';
 import '/services/api_service.dart';
@@ -12,23 +11,44 @@ class OrderService {
   final String baseUrl = 'orders';
   final ApiService _apiService = getx.Get.put(ApiService());
 
-  Future<List<Order>> getByQRCode(String qrCodeString) async {
+  // Future<List<Order>> getByQRCode(String qrCodeString) async {
+  //   final response = await _apiService.request
+  //       .get('$baseUrl/getOrderByQrCode?qrCode=$qrCodeString');
+  //   List<Order> list = [];
+  //   logger.e(response.data['data']);
+  //   for (var e in response.data['data']) {
+  //     list.add(Order.fromJson(e));
+  //     var order = list.last;
+  //     var responseFood =
+  //         await FoodService().getById(order.orderDetails![0].foodId!);
+  //     order.orderDetails![0].food = Food.fromJson(responseFood.data['data']);
+  //   }
+  //   return list;
+  // }
+
+  Future<Order> getById(String id) async {
+    final response = await _apiService.request.get('$baseUrl/$id');
+    Order order = Order.fromJson(response.data['data']);
+    for (var i = 0; i < order.orderDetails!.length; i++) {
+      var responseFood =
+          await FoodService().getById(order.orderDetails![i].foodId!);
+      order.orderDetails![i].food = Food.fromJson(responseFood.data['data']);
+    }
+    return order;
+  }
+
+  Future<List<Order>> getByQrCode(String qrCode) async {
     final response = await _apiService.request
-        .get('$baseUrl/getOrderByQrCode?qrCode=$qrCodeString');
+        .get('$baseUrl/getOrderByQrCode?qrCode=$qrCode');
     List<Order> list = [];
-    logger.e(response.data['data']);
-    // for (var e in response.data['data']) {
-    //   list.add(Order.fromJson(e));
-    //   var order = list.last;
-    //   var responseFood =
-    //       await FoodService().getById(order.orderDetails![0].foodId!);
-    //   order.orderDetails![0].food = Food.fromJson(responseFood.data['data']);
-    // }
+    for (var e in response.data['data']) {
+      list.add(Order.fromJson(e));
+    }
     return list;
   }
 
-  Future<Order> getById(String id) async {
-    final response = await _apiService.request.get('food/$id');
-    return Order.fromJson(response.data['data']);
+  Future<Response> completeOrderStatus(String id) async {
+    final response = await _apiService.request.put('$baseUrl/complete/$id');
+    return response;
   }
 }

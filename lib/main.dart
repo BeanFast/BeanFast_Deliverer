@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'binding.dart';
-import 'contrains/theme.dart';
 import 'views/screens/splash_screen.dart';
 
 Future<void> main() async {

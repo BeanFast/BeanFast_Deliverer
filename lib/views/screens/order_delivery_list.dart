@@ -1,10 +1,14 @@
-import 'package:beanfast_deliverer/views/screens/order_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '/models/order.dart';
+import '/utils/formater.dart';
+import '/views/screens/order_detail_screen.dart';
+
 class OrderDeliveryListScreen extends StatelessWidget {
-  const OrderDeliveryListScreen({super.key});
+  final List<Order> list;
+  const OrderDeliveryListScreen({super.key, required this.list});
 
   @override
   Widget build(BuildContext context) {
@@ -12,48 +16,59 @@ class OrderDeliveryListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Order Delivery List'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: List.generate(
-            10,
-            (index) => GestureDetector(
-              onTap: () {
-                Get.to( const OrderDetailScreen());
-              },
-              child: Card(
-                color: Colors.white,
-                shadowColor: Colors.white,
-                elevation: 1,
-                child: ListTile(
-                  leading: const Icon(Iconsax.box_tick),
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('ID: #$index'),
-                      Text('Tên khách hàng $index'),
-                    ],
-                  ),
-                  subtitle: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Số sản phẩm: $index'),
-                      Text('Tổng giá: 200.000$indexđ'),
-                    ],
-                  ),
-                  trailing: IconButton(
-                     icon: const Icon(Iconsax.arrow_right),
-                    onPressed: () {
-                       Get.to( const OrderDetailScreen());
-                    },
-                  ),
-                ),
+      body: list.isEmpty
+          ? const Center(
+              child: Text('Không có đơn hàng nào được giao'),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: list
+                    .map(
+                      (order) => GestureDetector(
+                        onTap: () {
+                          Get.off(OrderDetailScreen(
+                            orderId: order.id!,
+                          ));
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          shadowColor: Colors.white,
+                          elevation: 1,
+                          child: ListTile(
+                            leading: const Icon(Iconsax.box_tick),
+                            title: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('ID: #${order.code}'),
+                                Text('Tên khách hàng ${order.code}'),
+                              ],
+                            ),
+                            subtitle: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    'Số sản phẩm: ${order.orderDetails!.length}'),
+                                Text(
+                                    'Tổng giá: ${Formater.formatMoney(order.totalPrice.toString())}'),
+                              ],
+                            ),
+                            trailing: IconButton(
+                              icon: const Icon(Iconsax.arrow_right),
+                              onPressed: () {
+                                Get.to(OrderDetailScreen(
+                                  orderId: order.id!,
+                                ));
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

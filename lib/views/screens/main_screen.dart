@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      const DeliverySchedulesScreen(),
+      const DeliveryScheduleScreen(),
       const AccountScreen()
     ];
     //  final List<Widget> screens = [const OrderScreen(), const AccountScreen()];

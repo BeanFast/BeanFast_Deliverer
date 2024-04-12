@@ -15,7 +15,9 @@ class OrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(const OrderDetailScreen());
+        Get.to(OrderDetailScreen(
+          orderId: order.id!,
+        ));
       },
       child: Container(
         color: ThemeColor.bgColor,
