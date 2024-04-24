@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'binding.dart';
+import 'contrains/theme.dart';
 import 'views/screens/splash_screen.dart';
 
 Future<void> main() async {
@@ -29,14 +30,12 @@ class MyApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       title: 'BeanFast',
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-      ),
+      theme: AppTheme.defaulTheme,
       initialRoute: "/",
       getPages: [
         GetPage(
           name: '/',
-          page: () => SplashView(),
+          page: () => const SplashScreen(),
           binding: AuthBindingController(),
           // transition: Transition.fade,
         )

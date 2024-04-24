@@ -4,18 +4,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import '/enums/menu_index_enum.dart';
+import '/utils/constants.dart';
+import '/views/screens/splash_screen.dart';
 import '/utils/logger.dart';
 import '/services/auth_service.dart';
-import '/models/account.dart';
 import '/enums/auth_state_enum.dart';
 
 class AuthController extends GetxController with CacheManager {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  var isMoneyVisible = false.obs;
-
-  late Rx<Account?> account;
-  Rx<AuthState> authState = AuthState.unauthenticated.obs;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -51,10 +48,18 @@ class AuthController extends GetxController with CacheManager {
     logOut();
   }
 
+  Future getCurrentUser() async {
+    try {
+      currentUser.value = await AuthService().getUser();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   void login() async {
     errorMessage.value = '';
-    emailController.text = 'deliverer02.beanfast@gmail.com';
-    passwordController.text = '12345678';
+    // emailController.text = 'deliverer02.beanfast@gmail.com';
+    // passwordController.text = '12345678';
     try {
       logger.e('login');
       var response = await AuthService()
@@ -62,6 +67,9 @@ class AuthController extends GetxController with CacheManager {
       if (response.statusCode == 200) {
         changeAuthState(AuthState.authenticated);
         await saveToken(response.data['data']['accessToken']);
+        changePage(MenuIndexState.home.index);
+        Get.offAll(const SplashScreen());
+        
       }
     } on DioException catch (e) {
       if (e.response!.statusCode == 400) {

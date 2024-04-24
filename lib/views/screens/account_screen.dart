@@ -121,112 +121,7 @@ class AccountScreen extends GetView<AuthController> {
                                           ],
                                         ),
                                         const SizedBox(height: 10),
-                                        if (!isValid)
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: Card(
-                                              child: Container(
-                                                height: 170,
-                                                width: innerWidth - 40,
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Image.network(
-                                                          'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-                                                          width: 100,
-                                                          height: 100,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                        Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 5,
-                                                                  right: 5),
-                                                          width:
-                                                              innerWidth - 160,
-                                                          height: 100,
-                                                          child: const Column(
-                                                            children: [
-                                                              Text(
-                                                                'Yêu cầu bổ sung CMND/CCCD để xác thực tài khoản',
-                                                                maxLines: 1,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Text(
-                                                                'Bắc buộc để sử dụng các dịch vụ của chúng tôi',
-                                                                maxLines: 4,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    const SizedBox(height: 10),
-                                                    SizedBox(
-                                                      height: 40,
-                                                      width: innerWidth,
-                                                      child: ElevatedButton(
-                                                        onPressed: () {},
-                                                        style: ButtonStyle(
-                                                            backgroundColor:
-                                                                MaterialStateProperty
-                                                                    .all<Color>(
-                                                                        Colors
-                                                                            .blue),
-                                                            foregroundColor:
-                                                                MaterialStateProperty
-                                                                    .all<Color>(
-                                                                        Colors
-                                                                            .white),
-                                                            shape: MaterialStateProperty.all<
-                                                                    RoundedRectangleBorder>(
-                                                                const RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10),
-                                                              ),
-                                                            ))),
-                                                        child: const Text(
-                                                            'Xác nhận thông tin'),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        const SizedBox(height: 10),
+                                       const SizedBox(height: 10),
                                         SizedBox(
                                           width: innerWidth,
                                           child: Row(
@@ -331,12 +226,6 @@ class AccountScreen extends GetView<AuthController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SettingItem(
-                            title: "Danh sách học sinh",
-                            icon: Ionicons.earth,
-                            iconColor: Colors.red,
-                            onTap: () {},
-                          ),
                           const SizedBox(height: 10),
                           Container(
                             color: Colors.white,
@@ -382,29 +271,6 @@ class AccountScreen extends GetView<AuthController> {
                             icon: Ionicons.earth,
                             iconColor: Colors.red,
                             value: "English",
-                            onTap: () {
-                              Get.snackbar('on Tap', 'Tap',
-                                  snackPosition: SnackPosition.TOP);
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          Container(
-                            color: Colors.white,
-                            child: SettingItem(
-                              title: "Nút số 2",
-                              icon: Ionicons.earth,
-                              iconColor: Colors.red,
-                              onTap: () {
-                                Get.snackbar('on Tap', 'Tap',
-                                    snackPosition: SnackPosition.TOP);
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          SettingItem(
-                            title: "Nút số 3",
-                            icon: Ionicons.earth,
-                            iconColor: Colors.red,
                             onTap: () {
                               Get.snackbar('on Tap', 'Tap',
                                   snackPosition: SnackPosition.TOP);

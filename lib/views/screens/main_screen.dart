@@ -1,13 +1,13 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:beanfast_deliverer/views/screens/delivery_schedules_screen.dart';
-import 'package:beanfast_deliverer/views/screens/qr_scanner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '/contrains/theme_color.dart';
+import '/views/screens/delivery_schedules_screen.dart';
+import '/views/screens/qr_scanner_screen.dart';
 import '/utils/constants.dart';
 import 'account_screen.dart';
-import 'notification_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -18,20 +18,33 @@ class MainScreen extends StatelessWidget {
       const DeliveryScheduleScreen(),
       const AccountScreen()
     ];
-    //  final List<Widget> screens = [const OrderScreen(), const AccountScreen()];
+
+    List iconList = [
+      Iconsax.calendar_tick,
+      Iconsax.profile_2user
+    ];
+    
     return Scaffold(
       appBar: AppBar(
         actions: headerActionWidget(),
       ),
       body: Obx(() => screens[selectedMenuIndex.value]),
       bottomNavigationBar: Obx(
-        () => AnimatedBottomNavigationBar(
+        () => AnimatedBottomNavigationBar.builder(
+          height: 50,
           activeIndex: selectedMenuIndex.value,
           onTap: changePage,
-          icons: const [Icons.assignment_outlined, Iconsax.profile_circle],
+          itemCount: iconList.length,
+          tabBuilder: (index, isActive) {
+            return Icon(
+              iconList[index],
+              size: 24,
+              color: isActive ? ThemeColor.primaryColor : Colors.black54,
+            );
+          },
+          notchMargin: 5,
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.defaultEdge,
-          activeColor: Colors.green,
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -69,8 +82,8 @@ List<Widget> headerActionWidget() {
                 borderRadius: BorderRadius.circular(50),
                 child: Image(
                   image: Image.network(
-                          'https://img.freepik.com/free-vector/flat-sale-banner-with-photo_23-2149026968.jpg')
-                      .image,
+                      // 'https://img.freepik.com/free-vector/flat-sale-banner-with-photo_23-2149026968.jpg'
+                      currentUser.value.avatarPath.toString()).image,
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
@@ -85,7 +98,7 @@ List<Widget> headerActionWidget() {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nguyen van a',
+                      currentUser.value.fullName!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Get.textTheme.bodyMedium!.copyWith(
@@ -103,62 +116,11 @@ List<Widget> headerActionWidget() {
                   ],
                 ),
               ),
-              const Icon(
-                Icons.keyboard_arrow_down,
-                size: 24,
-                color: Colors.green,
-              )
             ],
           ),
         ),
       ),
     ),
     const Spacer(),
-    Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Stack(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 5),
-            width: 50,
-            height: 50,
-            child: Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: const Icon(Icons.notifications_outlined, size: 30),
-                onPressed: () {
-                  Get.to(const NotificationScreen());
-                },
-              ),
-            ),
-          ),
-          Visibility(
-            visible: true,
-            child: Positioned(
-              top: 5,
-              right: 3,
-              width: 20,
-              height: 20,
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.red,
-                ),
-                child: const Center(
-                  child: Text(
-                    '99+',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
   ];
 }

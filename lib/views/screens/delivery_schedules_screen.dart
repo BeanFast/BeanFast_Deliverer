@@ -77,12 +77,12 @@ class DeliveryScheduleScreen extends GetView<DeliveryScheduleController> {
                                                   leading: const Icon(
                                                       Iconsax.location),
                                                   title: Text(DateFormat(
-                                                              'dd/MM/yy - ')
+                                                              'HH:mm - ')
                                                           .format(sessionDetail
                                                               .value
                                                               .session!
                                                               .deliveryStartTime!) +
-                                                      DateFormat('dd/MM/yy')
+                                                      DateFormat('HH:mm')
                                                           .format(sessionDetail
                                                               .value
                                                               .session!

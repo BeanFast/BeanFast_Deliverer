@@ -2,7 +2,6 @@ import '/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/services/auth_service.dart';
 import '/utils/logger.dart';
 import '/controllers/auth_controller.dart';
 import '/enums/auth_state_enum.dart';
@@ -10,20 +9,15 @@ import 'error_screen.dart';
 import 'login_screen.dart';
 import 'main_screen.dart';
 
-class SplashView extends StatelessWidget {
-  SplashView({super.key});
-
-  final AuthController _authController = Get.find();
+class SplashScreen extends GetView<AuthController> {
+  const SplashScreen({super.key});
 
   Future<void> initializeSettings() async {
     logger.i('initializeSettings');
-    _authController.checkLoginStatus();
-    if (_authController.authState.value == AuthState.authenticated) {
-      currentUser.value = await AuthService().getUser();
+    controller.checkLoginStatus();
+    if (authState.value == AuthState.authenticated) {
+      await controller.getCurrentUser();
     }
-
-    //Simulate other services for 3 seconds
-    // await Future.delayed(Duration(seconds: 3));
   }
 
   @override
@@ -43,7 +37,7 @@ class SplashView extends StatelessWidget {
           // } else {
           // logger.e('else');
           return Obx(() {
-            switch (_authController.authState.value) {
+            switch (authState.value) {
               case AuthState.authenticated:
                 return const MainScreen();
               case AuthState.unauthenticated:
