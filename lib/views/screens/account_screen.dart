@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:beanfast_deliverer/contrains/theme_color.dart';
+
 import '/controllers/auth_controller.dart';
 import '/utils/constants.dart';
 import '/views/widgets/account_icon_button_widget.dart';
@@ -14,28 +16,18 @@ class AccountScreen extends GetView<AuthController> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    bool randomBool = Random().nextBool();
-    bool isValid = true;
-    double topCardheight = isValid ? 160 : 340;
+    double topCardheight = 160;
     return Stack(
       fit: StackFit.expand,
       children: [
         Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.red,
-                Color.fromRGBO(39, 105, 171, 1),
-              ],
-              begin: FractionalOffset.bottomCenter,
-              end: FractionalOffset.topCenter,
-            ),
+          decoration: BoxDecoration(
+            color: ThemeColor.itemColor,
           ),
         ),
         SafeArea(
           child: Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor: ThemeColor.bgColor,
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(),
@@ -60,6 +52,8 @@ class AccountScreen extends GetView<AuthController> {
                                 left: 0,
                                 right: 0,
                                 child: Card(
+                                  color: ThemeColor.itemColor,
+
                                   child: SizedBox(
                                     height: topCardheight,
                                     width: innerWidth,
@@ -91,37 +85,15 @@ class AccountScreen extends GetView<AuthController> {
                                             const SizedBox(
                                               width: 5,
                                             ),
-                                            Container(
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: isValid
-                                                      ? Colors.green
-                                                      : Colors.red,
-                                                ),
-                                                child: Container(
-                                                  child: isValid
-                                                      ? const Text(
-                                                          'Đã xác thực',
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 14,
-                                                          ),
-                                                        )
-                                                      : const Text(
-                                                          'Chưa xác thực',
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 14,
-                                                          ),
-                                                        ),
-                                                )),
+                                            const Icon(
+                                              Icons.verified_outlined,
+                                              color: Colors.green,
+                                              size: 20,
+                                            ),
                                           ],
                                         ),
                                         const SizedBox(height: 10),
-                                       const SizedBox(height: 10),
+                                        const SizedBox(height: 10),
                                         SizedBox(
                                           width: innerWidth,
                                           child: Row(
@@ -137,7 +109,7 @@ class AccountScreen extends GetView<AuthController> {
                                                       backgroundColor:
                                                           MaterialStateProperty
                                                               .all<Color>(
-                                                                  Colors.blue),
+                                                                  Colors.green),
                                                       foregroundColor:
                                                           MaterialStateProperty
                                                               .all<Color>(
@@ -165,7 +137,7 @@ class AccountScreen extends GetView<AuthController> {
                                                       backgroundColor:
                                                           MaterialStateProperty
                                                               .all<Color>(
-                                                                  Colors.blue),
+                                                                  Colors.green),
                                                       foregroundColor:
                                                           MaterialStateProperty
                                                               .all<Color>(
@@ -216,38 +188,27 @@ class AccountScreen extends GetView<AuthController> {
                     const Text(
                       "Cài đặt",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Card(
-                      color: Colors.white,
+                    color: ThemeColor.itemColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 10),
-                          Container(
-                            color: Colors.white,
-                            child: SettingItem(
-                              title: "Nút số 2",
-                              icon: Ionicons.earth,
-                              iconColor: Colors.red,
-                              onTap: () {
-                                Get.snackbar('on Tap', 'Tap',
-                                    snackPosition: SnackPosition.TOP);
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 10),
                           SettingItem(
-                            title: "Nút số 3",
+                            title: "Nút số 1",
                             icon: Ionicons.earth,
-                            iconColor: Colors.red,
-                            onTap: () {
-                              Get.snackbar('on Tap', 'Tap',
-                                  snackPosition: SnackPosition.TOP);
-                            },
+                            iconColor: Colors.green,
+                            onTap: () {},
+                          ),
+                          SettingItem(
+                            title: "Nút số 2",
+                            icon: Ionicons.earth,
+                            iconColor: Colors.amber,
+                            onTap: () {},
                           ),
                         ],
                       ),
@@ -256,13 +217,13 @@ class AccountScreen extends GetView<AuthController> {
                     const Text(
                       "Tiện ích",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Card(
-                      color: Colors.white,
+                    color: ThemeColor.itemColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -270,10 +231,9 @@ class AccountScreen extends GetView<AuthController> {
                             title: "Ngôn ngữ",
                             icon: Ionicons.earth,
                             iconColor: Colors.red,
-                            value: "English",
+                            value: "Tiếng việt",
                             onTap: () {
-                              Get.snackbar('on Tap', 'Tap',
-                                  snackPosition: SnackPosition.TOP);
+                             
                             },
                           ),
                         ],
@@ -285,7 +245,7 @@ class AccountScreen extends GetView<AuthController> {
                       children: [
                         SizedBox(
                           height: 40,
-                          width: width / 2 - 15,
+                          width: width  - 25,
                           child: ElevatedButton(
                             onPressed: () {
                               controller.logOut();
@@ -293,7 +253,7 @@ class AccountScreen extends GetView<AuthController> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.blue),
+                                        Colors.green),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
@@ -308,29 +268,7 @@ class AccountScreen extends GetView<AuthController> {
                             child: const Text('Đăng xuất'),
                           ),
                         ),
-                        SizedBox(
-                          height: 40,
-                          width: width / 2 - 15,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.blue),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                        10), // Adjust the value as needed
-                                  ),
-                                ))),
-                            child: const Text('Đổi tài khoản'),
-                          ),
-                        ),
+                       
                       ],
                     ),
                     const SizedBox(height: 20),

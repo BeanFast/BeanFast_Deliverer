@@ -39,7 +39,7 @@ class MainScreen extends StatelessWidget {
             return Icon(
               iconList[index],
               size: 24,
-              color: isActive ? ThemeColor.primaryColor : Colors.black54,
+              color: isActive ? Colors.green : Colors.black54,
             );
           },
           notchMargin: 5,
@@ -54,9 +54,10 @@ class MainScreen extends StatelessWidget {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
-        backgroundColor: Colors.green.withOpacity(0.5),
+        backgroundColor: Colors.green,
         child: const Icon(
           Iconsax.scan_barcode,
+          color: Colors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -68,12 +69,12 @@ List<Widget> headerActionWidget() {
   return <Widget>[
     GestureDetector(
       onTap: () {
-        Get.snackbar('title', 'message');
+       
       },
       child: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: SizedBox(
-          width: Get.width * 0.5,
+          width: Get.width * 0.6,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -39,7 +39,7 @@ class SettingItem extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -48,7 +48,7 @@ class SettingItem extends StatelessWidget {
                 ? Text(
                     value!,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.grey,
                     ),
                   )
