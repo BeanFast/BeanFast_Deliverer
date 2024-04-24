@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
-import 'package:beanfast_deliverer/controllers/delivery_schedule_controller.dart';
-import 'package:beanfast_deliverer/views/screens/loading_screen.dart';
-import 'package:beanfast_deliverer/views/screens/order_delivery_list.dart';
+import '/controllers/delivery_schedule_controller.dart';
+import '/views/screens/loading_screen.dart';
+import '/views/screens/order_delivery_list.dart';
 
 class DeliveryScheduleScreen extends GetView<DeliveryScheduleController> {
   const DeliveryScheduleScreen({super.key});
