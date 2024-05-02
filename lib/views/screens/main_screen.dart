@@ -1,12 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:beanfast_deliverer/views/widgets/image_default.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '/contrains/theme_color.dart';
+import '/utils/constants.dart';
 import '/views/screens/delivery_schedules_screen.dart';
 import '/views/screens/qr_scanner_screen.dart';
-import '/utils/constants.dart';
 import 'account_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -18,9 +18,13 @@ class MainScreen extends StatelessWidget {
       const DeliveryScheduleScreen(),
       const AccountScreen()
     ];
+<<<<<<< HEAD
 
     List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
 
+=======
+    List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
+>>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
     return Scaffold(
       appBar: AppBar(
         actions: headerActionWidget(),
@@ -36,7 +40,7 @@ class MainScreen extends StatelessWidget {
             return Icon(
               iconList[index],
               size: 24,
-              color: isActive ? ThemeColor.primaryColor : Colors.black54,
+              color: isActive ? Colors.green : Colors.black54,
             );
           },
           notchMargin: 5,
@@ -51,9 +55,10 @@ class MainScreen extends StatelessWidget {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
-        backgroundColor: Colors.green.withOpacity(0.5),
+        backgroundColor: Colors.green,
         child: const Icon(
           Iconsax.scan_barcode,
+          color: Colors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -64,17 +69,16 @@ class MainScreen extends StatelessWidget {
 List<Widget> headerActionWidget() {
   return <Widget>[
     GestureDetector(
-      onTap: () {
-        Get.snackbar('title', 'message');
-      },
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: SizedBox(
-          width: Get.width * 0.5,
+          width: Get.width * 0.6,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+<<<<<<< HEAD
               Obx(() => ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: currentUser.value == null
@@ -86,6 +90,17 @@ List<Widget> headerActionWidget() {
                             fit: BoxFit.cover,
                           ),
                   )),
+=======
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: CustomNetworkImage(
+                  currentUser.value.avatarPath.toString(),
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                ),
+              ),
+>>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
               const SizedBox(
                 width: 7,
               ),
@@ -94,6 +109,7 @@ List<Widget> headerActionWidget() {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+<<<<<<< HEAD
                     Obx(() => Text(
                           currentUser.value == null
                               ? 'Chưa có thông tin'
@@ -104,12 +120,22 @@ List<Widget> headerActionWidget() {
                             color: Colors.green,
                           ),
                         )),
+=======
                     Text(
-                      'Fast food delivery',
+                      currentUser.value.fullName! ?? '',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Get.textTheme.bodyLarge!.copyWith(
+                        color: Colors.green,
+                      ),
+                    ),
+>>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
+                    Text(
+                      'BeanFast giao hàng viên',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Get.textTheme.bodySmall!.copyWith(
-                        color: Colors.grey,
+                        color: Colors.black54,
                       ),
                     ),
                   ],

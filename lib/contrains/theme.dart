@@ -1,15 +1,21 @@
+import 'package:beanfast_deliverer/contrains/theme_text.dart';
 import 'package:flutter/material.dart';
 
 import 'theme_color.dart';
 
 class AppTheme {
   static ThemeData defaulTheme = ThemeData(
+    fontFamily: 'Montserrat',
     scaffoldBackgroundColor: ThemeColor.bgColor,
     primaryColor: ThemeColor.primaryColor,
-    primaryTextTheme: TextTheme(
-      headlineSmall: TextStyle(color: ThemeColor.textColor),
-      titleSmall: TextStyle(color: ThemeColor.textColor, fontSize: 16),
-      bodySmall: TextStyle(color: ThemeColor.textColor, fontSize: 12),
+    // primaryTextTheme: TextTheme(
+    //   headlineSmall: TextStyle(color: ThemeColor.textColor),
+    //   titleSmall: TextStyle(color: ThemeColor.textColor, fontSize: 16),
+    //   bodySmall: TextStyle(color: ThemeColor.textColor, fontSize: 12),
+    // ),
+    textTheme: DTextTheme.textTheme,
+    colorScheme: ColorScheme.light(
+      primary: ThemeColor.primaryColor,
     ),
     // textTheme: TextTheme(titleMedium: ),
     listTileTheme: ListTileThemeData(
@@ -60,8 +66,9 @@ class AppTheme {
         elevation: 0.8,
         hoverElevation: 1),
     cardTheme: CardTheme(
-      color: ThemeColor.bgColor2,
-      shadowColor: ThemeColor.bgColor,
+      surfaceTintColor: null,
+      color: ThemeColor.itemColor,
+      shadowColor: ThemeColor.itemColor,
       elevation: 0.5,
     ),
     dialogBackgroundColor: ThemeColor.bgColor2,

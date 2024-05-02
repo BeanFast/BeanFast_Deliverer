@@ -1,3 +1,4 @@
+import 'package:beanfast_deliverer/views/widgets/is_empty.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -14,11 +15,16 @@ class OrderDeliveryListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order Delivery List'),
+        title: const Text('Đơn hàng cần giao'),
       ),
       body: list.isEmpty
+<<<<<<< HEAD
           ? const Center(
               child: Text('Không có đơn hàng nào để giao cho khách hàng này'),
+=======
+          ? const IsEmptyWidget(
+              title: 'Không có đơn hàng nào được giao',
+>>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
             )
           : SingleChildScrollView(
               child: Column(
@@ -26,9 +32,11 @@ class OrderDeliveryListScreen extends StatelessWidget {
                     .map(
                       (order) => GestureDetector(
                         onTap: () {
-                          Get.off(OrderDetailScreen(
-                            orderId: order.id!,
-                          ));
+                          Get.off(
+                            OrderDetailScreen(
+                              orderId: order.id!,
+                            ),
+                          );
                         },
                         child: Card(
                           color: Colors.white,
