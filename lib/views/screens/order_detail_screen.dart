@@ -2,6 +2,7 @@
 import 'package:beanfast_deliverer/utils/logger.dart';
 import 'package:beanfast_deliverer/views/screens/delivery_schedules_screen.dart';
 import 'package:beanfast_deliverer/views/widgets/banner_order_status.dart';
+import 'package:beanfast_deliverer/views/widgets/image_default.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -117,7 +118,7 @@ class OrderDetailScreen extends GetView<OrderController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Image.network(
+                                        CustomNetworkImage(
                                           e.food!.imagePath!,
                                           width: 80,
                                           height: 80,

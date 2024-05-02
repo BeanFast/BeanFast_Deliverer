@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class SettingItem extends StatelessWidget {
   final String title;
@@ -38,17 +39,13 @@ class SettingItem extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+               style: Get.theme.textTheme.titleSmall!.copyWith(),
             ),
             const Spacer(),
             value != null
                 ? Text(
                     value!,
-                    style: const TextStyle(
-                      fontSize: 14,
+                     style: Get.theme.textTheme.bodyLarge!.copyWith(
                       color: Colors.grey,
                     ),
                   )
@@ -78,7 +75,7 @@ class ForwardButton extends StatelessWidget {
       child: const SizedBox(
         width: 50,
         height: 50,
-        child: Icon(Ionicons.chevron_forward_outline),
+        child: Icon(Iconsax.arrow_right_3, color: Colors.grey),
       ),
     );
   }

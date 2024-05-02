@@ -1,12 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:beanfast_deliverer/views/widgets/image_default.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '/contrains/theme_color.dart';
+import '/utils/constants.dart';
 import '/views/screens/delivery_schedules_screen.dart';
 import '/views/screens/qr_scanner_screen.dart';
-import '/utils/constants.dart';
 import 'account_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -18,12 +18,7 @@ class MainScreen extends StatelessWidget {
       const DeliveryScheduleScreen(),
       const AccountScreen()
     ];
-
-    List iconList = [
-      Iconsax.calendar_tick,
-      Iconsax.profile_2user
-    ];
-    
+    List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
     return Scaffold(
       appBar: AppBar(
         actions: headerActionWidget(),
@@ -68,9 +63,7 @@ class MainScreen extends StatelessWidget {
 List<Widget> headerActionWidget() {
   return <Widget>[
     GestureDetector(
-      onTap: () {
-       
-      },
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: SizedBox(
@@ -81,10 +74,8 @@ List<Widget> headerActionWidget() {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image(
-                  image: Image.network(
-                      // 'https://img.freepik.com/free-vector/flat-sale-banner-with-photo_23-2149026968.jpg'
-                      currentUser.value.avatarPath.toString()).image,
+                child: CustomNetworkImage(
+                  currentUser.value.avatarPath.toString(),
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
@@ -99,19 +90,19 @@ List<Widget> headerActionWidget() {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      currentUser.value.fullName!,
+                      currentUser.value.fullName! ?? '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Get.textTheme.bodyMedium!.copyWith(
+                      style: Get.textTheme.bodyLarge!.copyWith(
                         color: Colors.green,
                       ),
                     ),
                     Text(
-                      'Fast food delivery',
+                      'BeanFast giao hàng viên',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Get.textTheme.bodySmall!.copyWith(
-                        color: Colors.grey,
+                        color: Colors.black54,
                       ),
                     ),
                   ],

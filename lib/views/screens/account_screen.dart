@@ -1,6 +1,9 @@
 import 'dart:math';
 
 import 'package:beanfast_deliverer/contrains/theme_color.dart';
+import 'package:beanfast_deliverer/views/widgets/image_default.dart';
+import 'package:beanfast_deliverer/views/widgets/sbutton.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '/controllers/auth_controller.dart';
 import '/utils/constants.dart';
@@ -53,7 +56,6 @@ class AccountScreen extends GetView<AuthController> {
                                 right: 0,
                                 child: Card(
                                   color: ThemeColor.itemColor,
-
                                   child: SizedBox(
                                     height: topCardheight,
                                     width: innerWidth,
@@ -67,9 +69,7 @@ class AccountScreen extends GetView<AuthController> {
                                         ),
                                         Text(
                                           currentUser.value.fullName!,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                          ),
+                                          style: Get.textTheme.bodyMedium,
                                         ),
                                         const SizedBox(height: 5),
                                         Row(
@@ -78,17 +78,14 @@ class AccountScreen extends GetView<AuthController> {
                                           children: [
                                             Text(
                                               currentUser.value.phone!,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
+                                              style: Get.textTheme.bodySmall,
                                             ),
                                             const SizedBox(
                                               width: 5,
                                             ),
                                             const Icon(
-                                              Icons.verified_outlined,
+                                              Iconsax.tick_circle,
                                               color: Colors.green,
-                                              size: 20,
                                             ),
                                           ],
                                         ),
@@ -170,7 +167,7 @@ class AccountScreen extends GetView<AuthController> {
                                 right: 0,
                                 child: Center(
                                   child: ClipOval(
-                                    child: Image.network(
+                                    child: CustomNetworkImage(
                                       currentUser.value.avatarPath!,
                                       width: 100,
                                       height: 100,
@@ -185,102 +182,85 @@ class AccountScreen extends GetView<AuthController> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    const Text(
+                    Text(
                       "Cài đặt",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Get.textTheme.headlineLarge,
                     ),
                     const SizedBox(height: 10),
                     Card(
-                    color: ThemeColor.itemColor,
+                      color: ThemeColor.itemColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SettingItem(
                             title: "Nút số 1",
                             icon: Ionicons.earth,
-                            iconColor: Colors.green,
+                            iconColor: Colors.black,
                             onTap: () {},
                           ),
                           SettingItem(
                             title: "Nút số 2",
                             icon: Ionicons.earth,
-                            iconColor: Colors.amber,
+                            iconColor: Colors.black,
                             onTap: () {},
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       "Tiện ích",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Get.textTheme.headlineLarge,
                     ),
                     const SizedBox(height: 10),
                     Card(
-                    color: ThemeColor.itemColor,
+                      color: ThemeColor.itemColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SettingItem(
                             title: "Ngôn ngữ",
                             icon: Ionicons.earth,
-                            iconColor: Colors.red,
+                            iconColor: Colors.black,
                             value: "Tiếng việt",
-                            onTap: () {
-                             
-                            },
+                            onTap: () {},
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 40,
-                          width: width  - 25,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              controller.logOut();
-                            },
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.green),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                        10), // Adjust the value as needed
-                                  ),
-                                ))),
-                            child: const Text('Đăng xuất'),
+                    Center(
+                      child: SButton(
+                          color: Colors.green,
+                          borderColor: Colors.green,
+                          text: "Đăng xuất",
+                          textStyle: Get.textTheme.titleSmall!.copyWith(
+                            color: Colors.white,
                           ),
-                        ),
-                       
-                      ],
+                          onPressed: () {
+                            controller.logOut();
+                          }),
                     ),
                     const SizedBox(height: 20),
-                    const Align(
+                    Align(
                       alignment: Alignment.center,
                       child: Text(
                         "Phiên bản 1.0.0",
-                        style: TextStyle(
-                          fontSize: 16,
+                        style: Get.textTheme.bodySmall!.copyWith(
                           color: Colors.grey,
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '© ${DateTime.now().year} Beanfast',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     )
                   ],
                 ),

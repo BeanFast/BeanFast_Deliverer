@@ -1,3 +1,4 @@
+import 'package:beanfast_deliverer/contrains/theme_text.dart';
 import 'package:flutter/material.dart';
 
 import 'theme_color.dart';
@@ -7,10 +8,14 @@ class AppTheme {
     fontFamily: 'Montserrat',
     scaffoldBackgroundColor: ThemeColor.bgColor,
     primaryColor: ThemeColor.primaryColor,
-    primaryTextTheme: TextTheme(
-      headlineSmall: TextStyle(color: ThemeColor.textColor),
-      titleSmall: TextStyle(color: ThemeColor.textColor, fontSize: 16),
-      bodySmall: TextStyle(color: ThemeColor.textColor, fontSize: 12),
+    // primaryTextTheme: TextTheme(
+    //   headlineSmall: TextStyle(color: ThemeColor.textColor),
+    //   titleSmall: TextStyle(color: ThemeColor.textColor, fontSize: 16),
+    //   bodySmall: TextStyle(color: ThemeColor.textColor, fontSize: 12),
+    // ),
+    textTheme: DTextTheme.textTheme,
+    colorScheme: ColorScheme.light(
+      primary: ThemeColor.primaryColor,
     ),
     // textTheme: TextTheme(titleMedium: ),
     listTileTheme: ListTileThemeData(
