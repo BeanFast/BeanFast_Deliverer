@@ -94,7 +94,7 @@ class DeliveryScheduleScreen extends GetView<DeliveryScheduleController> {
                                                                     .value
                                                                     .session!
                                                                     .deliveryStartTime!) +
-                                                            DateFormat('HH:mm')
+                                                            DateFormat('HH:mm -- dd/MM/yyyy')
                                                                 .format(sessionDetail
                                                                     .value
                                                                     .session!
