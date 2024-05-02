@@ -19,11 +19,8 @@ class MainScreen extends StatelessWidget {
       const AccountScreen()
     ];
 
-    List iconList = [
-      Iconsax.calendar_tick,
-      Iconsax.profile_2user
-    ];
-    
+    List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
+
     return Scaffold(
       appBar: AppBar(
         actions: headerActionWidget(),
@@ -78,17 +75,17 @@ List<Widget> headerActionWidget() {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image(
-                  image: Image.network(
-                      // 'https://img.freepik.com/free-vector/flat-sale-banner-with-photo_23-2149026968.jpg'
-                      currentUser.value.avatarPath.toString()).image,
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              Obx(() => ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: currentUser.value == null
+                        ? Image.asset('assets/images/image_not_available.png')
+                        : Image.network(
+                            currentUser.value!.avatarPath!,
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                  )),
               const SizedBox(
                 width: 7,
               ),
@@ -97,14 +94,16 @@ List<Widget> headerActionWidget() {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      currentUser.value.fullName!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Get.textTheme.bodyMedium!.copyWith(
-                        color: Colors.green,
-                      ),
-                    ),
+                    Obx(() => Text(
+                          currentUser.value == null
+                              ? 'Chưa có thông tin'
+                              : currentUser.value!.fullName!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Get.textTheme.bodyMedium!.copyWith(
+                            color: Colors.green,
+                          ),
+                        )),
                     Text(
                       'Fast food delivery',
                       maxLines: 1,

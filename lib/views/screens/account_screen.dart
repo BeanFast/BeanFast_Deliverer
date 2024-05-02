@@ -72,7 +72,9 @@ class AccountScreen extends GetView<AuthController> {
                                           height: 20,
                                         ),
                                         Text(
-                                          currentUser.value.fullName!,
+                                          currentUser.value == null
+                                              ? 'Chưa có thông tin'
+                                              : currentUser.value!.fullName!,
                                           style: const TextStyle(
                                             fontSize: 16,
                                           ),
@@ -83,7 +85,9 @@ class AccountScreen extends GetView<AuthController> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              currentUser.value.phone!,
+                                              currentUser.value == null
+                                                  ? 'Chưa có thông tin'
+                                                  : currentUser.value!.email!,
                                               style: const TextStyle(
                                                 fontSize: 14,
                                               ),
@@ -121,7 +125,7 @@ class AccountScreen extends GetView<AuthController> {
                                           ],
                                         ),
                                         const SizedBox(height: 10),
-                                       const SizedBox(height: 10),
+                                        const SizedBox(height: 10),
                                         SizedBox(
                                           width: innerWidth,
                                           child: Row(
@@ -198,12 +202,15 @@ class AccountScreen extends GetView<AuthController> {
                                 right: 0,
                                 child: Center(
                                   child: ClipOval(
-                                    child: Image.network(
-                                      currentUser.value.avatarPath!,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    ),
+                                    child: currentUser.value == null
+                                        ? Image.asset(
+                                            'assets/images/image_not_available.png')
+                                        : Image.network(
+                                            currentUser.value!.avatarPath!,
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                               ),

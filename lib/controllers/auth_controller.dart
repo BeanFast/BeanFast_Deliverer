@@ -35,12 +35,12 @@ class AuthController extends GetxController with CacheManager {
 
   void checkLoginStatus() {
     final String? token = getToken();
-    logger.e('token - ${token != null}');
+    logger.e('token - ${token}');
     if (token != null) {
       Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-      final expiryTimestamp = decodedToken["exp"];
-      final currentTime = DateTime.now().millisecondsSinceEpoch;
-      if (expiryTimestamp < currentTime) {
+      int exp = decodedToken['exp'];
+      DateTime expirationDate = DateTime.fromMillisecondsSinceEpoch(exp * 1000);
+      if (expirationDate.isAfter(DateTime.now())) {
         changeAuthState(AuthState.authenticated);
         return;
       }
@@ -51,8 +51,8 @@ class AuthController extends GetxController with CacheManager {
   Future getCurrentUser() async {
     try {
       currentUser.value = await AuthService().getUser();
-    } catch (e) {
-      throw Exception(e);
+    } on DioException catch (e) {
+      Get.snackbar('Lỗi', e.response!.data['message']);
     }
   }
 
@@ -67,14 +67,11 @@ class AuthController extends GetxController with CacheManager {
       if (response.statusCode == 200) {
         changeAuthState(AuthState.authenticated);
         await saveToken(response.data['data']['accessToken']);
-        changePage(MenuIndexState.home.index);
-        Get.offAll(const SplashScreen());
-        
+        // changePage(MenuIndexState.home.index);
+        // Get.offAll(const SplashScreen());
       }
     } on DioException catch (e) {
-      if (e.response!.statusCode == 400) {
-        errorMessage.value = 'Tài khoản hoặc mật khẩu không đúng';
-      }
+      Get.snackbar('Lỗi', e.response!.data['']);
     }
   }
 
@@ -87,19 +84,20 @@ class AuthController extends GetxController with CacheManager {
 mixin CacheManager {
   Future<bool> saveToken(String? token) async {
     final box = GetStorage();
-    await box.write(CacheManagerKey.TOKEN.toString(), token);
+    await box.write(CacheManagerKey.DELIVERERTOKEN.toString(), token);
     return true;
   }
 
   String? getToken() {
     final box = GetStorage();
-    return box.read(CacheManagerKey.TOKEN.toString());
+    return box.read(CacheManagerKey.DELIVERERTOKEN.toString());
   }
 
   Future<void> removeToken() async {
     final box = GetStorage();
-    await box.remove(CacheManagerKey.TOKEN.toString());
+    await box.remove(CacheManagerKey.DELIVERERTOKEN.toString());
   }
 }
 
-enum CacheManagerKey { TOKEN }
+// ignore: constant_identifier_names
+enum CacheManagerKey { DELIVERERTOKEN }
