@@ -18,13 +18,8 @@ class OrderDeliveryListScreen extends StatelessWidget {
         title: const Text('Đơn hàng cần giao'),
       ),
       body: list.isEmpty
-<<<<<<< HEAD
-          ? const Center(
-              child: Text('Không có đơn hàng nào để giao cho khách hàng này'),
-=======
           ? const IsEmptyWidget(
               title: 'Không có đơn hàng nào được giao',
->>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
             )
           : SingleChildScrollView(
               child: Column(

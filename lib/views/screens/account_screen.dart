@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '/contrains/theme_color.dart';
@@ -61,41 +62,20 @@ class AccountScreen extends GetView<AuthController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          currentUser.value == null
-                                              ? 'Chưa có thông tin'
-                                              : currentUser.value!.fullName!,
-                                          style: const TextStyle(
-                                            fontSize: 16,
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Text(
+                                            currentUser.value == null
+                                                ? 'Chưa có thông tin'
+                                                : currentUser.value!.email!,
+                                            style: Get.textTheme.bodyMedium!
+                                                .copyWith(
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ),
                                         ),
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              currentUser.value == null
-                                                  ? 'Chưa có thông tin'
-                                                  : currentUser.value!.email!,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            const Icon(
-                                              Iconsax.tick_circle,
-                                              color: Colors.green,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        const SizedBox(height: 10),
+                                        const SizedBox(height: 20),
                                         SizedBox(
                                           width: innerWidth,
                                           child: Row(
