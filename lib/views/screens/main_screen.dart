@@ -18,13 +18,9 @@ class MainScreen extends StatelessWidget {
       const DeliveryScheduleScreen(),
       const AccountScreen()
     ];
-<<<<<<< HEAD
 
     List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
 
-=======
-    List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
->>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
     return Scaffold(
       appBar: AppBar(
         actions: headerActionWidget(),
@@ -78,7 +74,6 @@ List<Widget> headerActionWidget() {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-<<<<<<< HEAD
               Obx(() => ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: currentUser.value == null
@@ -90,17 +85,6 @@ List<Widget> headerActionWidget() {
                             fit: BoxFit.cover,
                           ),
                   )),
-=======
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: CustomNetworkImage(
-                  currentUser.value.avatarPath.toString(),
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
-                ),
-              ),
->>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
               const SizedBox(
                 width: 7,
               ),
@@ -109,7 +93,6 @@ List<Widget> headerActionWidget() {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-<<<<<<< HEAD
                     Obx(() => Text(
                           currentUser.value == null
                               ? 'Chưa có thông tin'
@@ -120,16 +103,6 @@ List<Widget> headerActionWidget() {
                             color: Colors.green,
                           ),
                         )),
-=======
-                    Text(
-                      currentUser.value.fullName! ?? '',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Get.textTheme.bodyLarge!.copyWith(
-                        color: Colors.green,
-                      ),
-                    ),
->>>>>>> 6d76fe10aa8e9ac6eb36e53afcf7e390d85a1fed
                     Text(
                       'BeanFast giao hàng viên',
                       maxLines: 1,

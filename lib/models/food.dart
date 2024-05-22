@@ -37,12 +37,12 @@ class Food extends BaseModel {
   }
 
   factory Food.fromJson(dynamic json) => Food(
-      id: json['id'],
+      id: json['id'] ?? '',
       status: json['status'],
       categoryId: json["categoryId"],
       code: json["code"],
       name: json['name'],
-      price: double.parse(json['price'].toString()),
+      price: json['price'] == null ? 0 : double.parse(json['price'].toString()),
       description: json['description'],
       isCombo: json['isCombo'],
       imagePath: json['imagePath'] ??

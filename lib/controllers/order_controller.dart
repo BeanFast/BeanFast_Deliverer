@@ -28,6 +28,7 @@ class OrderController extends getx.GetxController {
   Future getById(String id) async {
     try {
       model.value = await OrderService().getById(id);
+      print("aaa");
     } catch (e) {
       throw Exception(e);
     }

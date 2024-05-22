@@ -28,11 +28,13 @@ class OrderService {
 
   Future<Order> getById(String id) async {
     final response = await _apiService.request.get('$baseUrl/$id');
-    Order order = Order.fromJson(response.data['data']);
+    var orderJson = response.data['data'];
+    Order order = Order.fromJson(orderJson);
     for (var i = 0; i < order.orderDetails!.length; i++) {
-      var responseFood =
-          await FoodService().getById(order.orderDetails![i].foodId!);
-      order.orderDetails![i].food = Food.fromJson(responseFood.data['data']);
+      var foodJson = orderJson["orderDetails"][i]["food"];
+      // var responseFood =
+      //     await FoodService().getById(order.orderDetails![i].foodId!);
+      order.orderDetails![i].food = Food.fromJson(foodJson);
     }
     return order;
   }
