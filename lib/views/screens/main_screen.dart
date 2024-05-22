@@ -18,9 +18,7 @@ class MainScreen extends StatelessWidget {
       const DeliveryScheduleScreen(),
       const AccountScreen()
     ];
-
     List iconList = [Iconsax.calendar_tick, Iconsax.profile_2user];
-
     return Scaffold(
       appBar: AppBar(
         actions: headerActionWidget(),
@@ -80,8 +78,8 @@ List<Widget> headerActionWidget() {
                         ? Image.asset('assets/images/image_not_available.png')
                         : Image.network(
                             currentUser.value!.avatarPath!,
-                            width: 100,
-                            height: 100,
+                            width: 50,
+                            height: 50,
                             fit: BoxFit.cover,
                           ),
                   )),

@@ -4,12 +4,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-import '/enums/menu_index_enum.dart';
-import '/utils/constants.dart';
-import '/views/screens/splash_screen.dart';
-import '/utils/logger.dart';
-import '/services/auth_service.dart';
 import '/enums/auth_state_enum.dart';
+import '/services/auth_service.dart';
+import '/utils/constants.dart';
+import '/utils/logger.dart';
 
 class AuthController extends GetxController with CacheManager {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
