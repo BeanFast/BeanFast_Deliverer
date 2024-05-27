@@ -13,6 +13,7 @@ class OrderDeliveryListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(list);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Đơn hàng cần giao'),
@@ -44,7 +45,10 @@ class OrderDeliveryListScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('ID: #${order.code}'),
-                                Text('Tên khách hàng ${order.code}'),
+                                Text(
+                                    'Tên khách hàng: ${order.profile!.user!.fullName}'),
+                                Text(
+                                    'Tên học sinh: ${order.profile!.fullName}'),
                               ],
                             ),
                             subtitle: Column(

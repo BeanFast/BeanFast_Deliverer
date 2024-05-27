@@ -56,14 +56,18 @@ class OrderDetailScreen extends GetView<OrderController> {
                                     style: Get.textTheme.labelLarge),
                               ],
                             ),
-                            Text('Trường tiểu học ',
+                            Text(
+                                controller.model.value.sessionDetail!.location!
+                                    .school!.name!,
                                 style: Get.textTheme.bodySmall),
                           ],
                         ),
                         Align(
                           alignment: Alignment.centerRight,
-                          child:
-                              Text('Cổng số 1', style: Get.textTheme.bodySmall),
+                          child: Text(
+                              controller
+                                  .model.value.sessionDetail!.location!.name!,
+                              style: Get.textTheme.bodySmall),
                         ),
                         const SizedBox(height: 5),
                         if (controller.model.value.deliveryDate != null)
@@ -300,8 +304,7 @@ class OrderDetailScreen extends GetView<OrderController> {
                         Get.off(const DeliveryScheduleScreen());
                         // if (status) showSuccessDialog(context);
                       },
-                      child:
-                       const Text('Xác nhận giao hàng',
+                      child: const Text('Xác nhận giao hàng',
                           style: TextStyle(fontSize: 18, color: Colors.white)),
                     ),
                   ),

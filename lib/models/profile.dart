@@ -41,6 +41,7 @@ class Profile extends BaseModel {
     this.className,
     this.currentBMI,
     this.school,
+    this.user,
     this.wallets,
     this.loyaltyCards,
   }) : super(id: id, status: status);
@@ -51,6 +52,11 @@ class Profile extends BaseModel {
       school = School.fromJson(json['school']);
     } else if (json['schoolName'] != null) {
       school = School(name: json['schoolName']);
+    }
+    User? user;
+    if (json['user'] != null) {
+      user = User();
+      user.fullName = json['user']['fullName'];
     }
     return Profile(
       id: json["id"],
@@ -68,6 +74,7 @@ class Profile extends BaseModel {
           ? 0
           : double.parse(json['currentBMI'].toString()),
       school: school,
+      user: user,
       // wallets: wallets.add(value) Wallet.fromJson(json['wallet']).toList(),
       loyaltyCards: json['loyaltyCards']?.map<LoyaltyCard>((item) {
         return LoyaltyCard.fromJson(item);

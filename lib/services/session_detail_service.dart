@@ -13,7 +13,9 @@ class SessionService {
     List<SessionDetail> list = [];
     final response = await _apiService.request.get('$baseUrl/deliveryschedule');
     for (var e in response.data['data']) {
-      list.add(SessionDetail.fromJson(e));
+      var sessionDetail = SessionDetail.fromJson(e);
+      // sessionDetail.
+      list.add(sessionDetail);
     }
     return list;
   }

@@ -73,7 +73,12 @@ class AuthController extends GetxController with CacheManager {
     }
   }
 
+  void clear() {
+    currentUser.value = null;
+  }
+
   void logOut() {
+    clear();
     changeAuthState(AuthState.unauthenticated);
     removeToken();
   }

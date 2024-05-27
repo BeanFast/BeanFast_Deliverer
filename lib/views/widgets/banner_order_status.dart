@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
-import '/models/order.dart';
-import '/contrains/theme_color.dart';
 import '/enums/status_enum.dart';
+import '/models/order.dart';
 
 class BannerOrderStatus extends StatelessWidget {
   final Order order;
@@ -12,41 +12,69 @@ class BannerOrderStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OrderStatus status = OrderStatus.fromInt(order.status!);
-    Color color = ThemeColor.bgColor;
     Text text = const Text('');
+    Icon icon = const Icon(
+      Iconsax.truck_fast,
+      color: Colors.white,
+      size: 90,
+    );
     switch (status) {
       case OrderStatus.preparing:
+        {
+          text = const Text(
+            'Đơn hàng đang được chuẩn bị',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          );
+          icon = const Icon(Iconsax.box_time, color: Colors.white, size: 60);
+        }
         // color = Colors.grey[300]!;
-        text = const Text('Đang chuẩn bị hàng',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold));
+
         break;
       case OrderStatus.delivering:
-        // color = Colors.grey[300]!;
-        text = Text(
-          'Đơn hàng sẽ được giao vào lúc ${DateFormat('hh:mm').format(order.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('hh:mm dd/MM/yy').format(order.sessionDetail!.session!.deliveryEndTime!)}. Vui lòng kiểm tra trước khi nhận hàng',
-          style: const TextStyle(
+        {
+          text = Text(
+            'Đơn hàng sẽ được giao vào lúc ${DateFormat('hh:mm').format(order.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('hh:mm dd/MM/yy').format(order.sessionDetail!.session!.deliveryEndTime!)}. Vui lòng kiểm tra trước khi giao hàng',
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          );
+          icon = const Icon(
+            Iconsax.truck_fast,
             color: Colors.white,
-          ),
-        );
+            size: 60,
+          );
+        }
+        // color = Colors.grey[300]!;
+
         break;
       case OrderStatus.completed:
-        text = const Text(
-          'Cảm ơn bạn chọn BeanFast!',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        );
+        {
+          text = const Text(
+            'Đơn hàng đã hoàn thành!',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          );
+          icon = const Icon(Iconsax.box_tick, color: Colors.white, size: 60);
+        }
+
         break;
       case OrderStatus.cancelled:
-        text = const Text(
-          'Đơn hàng đã bị huỷ. Vui lòng liên hệ với chúng tôi để biết thêm chi tiết.',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        );
-        break;
+        {
+          text = const Text(
+            'Đơn hàng đã bị huỷ.',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          );
+
+          icon =
+              const Icon(Iconsax.close_circle, color: Colors.white, size: 60);
+
+          break;
+        }
+
       default:
-        color = Colors.black;
     }
 
     return Container(
@@ -58,13 +86,9 @@ class BannerOrderStatus extends StatelessWidget {
           Expanded(
             child: text,
           ),
-          const SizedBox(
+          SizedBox(
             width: 90,
-            child: Icon(
-              Icons.car_rental,
-              color: Colors.white,
-              size: 90,
-            ),
+            child: icon,
           )
         ],
       ),
