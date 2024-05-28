@@ -1,3 +1,4 @@
+import 'package:beanfast_deliverer/enums/menu_index_enum.dart';
 import 'package:beanfast_deliverer/views/screens/splash_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class AuthController extends GetxController with CacheManager {
       if (response.statusCode == 200) {
         changeAuthState(AuthState.authenticated);
         await saveToken(response.data['data']['accessToken']);
-        // changePage(MenuIndexState.home.index);
+        changePage(MenuIndexState.home.index);
         Get.offAll(const SplashScreen());
       }
     } on DioException catch (e) {

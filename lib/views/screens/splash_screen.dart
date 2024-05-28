@@ -39,9 +39,7 @@ class SplashScreen extends GetView<AuthController> {
           return Obx(() {
             switch (authState.value) {
               case AuthState.authenticated:
-                {
-                  return const MainScreen();
-                }
+                return const MainScreen();
               case AuthState.unauthenticated:
                 return const LoginView();
               default:
