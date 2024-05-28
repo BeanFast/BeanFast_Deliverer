@@ -16,6 +16,9 @@ class AccountScreen extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
+    if (controller == null) {
+      Get.lazyPut(() => AuthController());
+    }
     double width = MediaQuery.of(context).size.width;
     double topCardheight = 160;
     return Stack(

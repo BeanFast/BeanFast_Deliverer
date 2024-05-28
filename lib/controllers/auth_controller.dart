@@ -1,3 +1,4 @@
+import 'package:beanfast_deliverer/views/screens/splash_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,10 +67,10 @@ class AuthController extends GetxController with CacheManager {
         changeAuthState(AuthState.authenticated);
         await saveToken(response.data['data']['accessToken']);
         // changePage(MenuIndexState.home.index);
-        // Get.offAll(const SplashScreen());
+        Get.offAll(const SplashScreen());
       }
     } on DioException catch (e) {
-      Get.snackbar('Lỗi', e.response!.data['']);
+      Get.snackbar('Lỗi', e.response!.data['message']);
     }
   }
 
@@ -80,6 +81,8 @@ class AuthController extends GetxController with CacheManager {
   void logOut() {
     clear();
     changeAuthState(AuthState.unauthenticated);
+    //  changePage(null);
+    // Get.deleteAll(force: true);
     removeToken();
   }
 }
