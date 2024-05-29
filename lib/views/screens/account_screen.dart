@@ -1,6 +1,3 @@
-import 'package:flutter/widgets.dart';
-import 'package:iconsax/iconsax.dart';
-
 import '/contrains/theme_color.dart';
 import '/views/widgets/sbutton.dart';
 import '/controllers/auth_controller.dart';

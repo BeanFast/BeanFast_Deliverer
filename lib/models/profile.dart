@@ -35,6 +35,7 @@ class Profile extends BaseModel {
     this.className,
     this.currentBMI,
     this.school,
+    this.user,
   }) : super(id: id, status: status);
 
   factory Profile.fromJson(dynamic json) {
@@ -60,6 +61,9 @@ class Profile extends BaseModel {
           ? 0
           : double.parse(json['currentBMI'].toString()),
       school: school,
+      user: json['user'] == null
+            ? User()
+            : User.fromJson(json['user']),
     );
   }
 }

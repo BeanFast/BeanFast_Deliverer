@@ -1,34 +1,32 @@
-// import 'package:beanfast_customer/views/screens/order_time_line.dart';
-import 'package:beanfast_deliverer/views/screens/delivery_schedules_screen.dart';
-import 'package:beanfast_deliverer/views/widgets/banner_order_status.dart';
-import 'package:beanfast_deliverer/views/widgets/image_default.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
+import '/views/widgets/banner_order_status.dart';
+import '/views/widgets/image_default.dart';
 import '/contrains/theme_color.dart';
 import '/controllers/order_controller.dart';
 import '/utils/formater.dart';
-import '/views/screens/loading_screen.dart';
+import 'loading_screen.dart';
 
 class OrderDetailScreen extends GetView<OrderController> {
-  const OrderDetailScreen({super.key, required this.orderId});
+  const OrderDetailScreen(
+      {super.key, required this.orderId, required this.deliverable});
   final String orderId;
+  final bool deliverable;
 
   @override
   Widget build(BuildContext context) {
     Get.put(OrderController());
-    return LoadingScreen(
-      future: () async {
-        await controller.getById(orderId);
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Chi tiết đơn hàng'),
-        ),
-        body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Chi tiết đơn hàng'),
+      ),
+      body: LoadingScreen(
+        future: () => controller.getById(orderId),
+        child: SingleChildScrollView(
           child: Obx(
             () => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +110,7 @@ class OrderDetailScreen extends GetView<OrderController> {
                       Column(
                         children: controller.model.value.orderDetails!
                             .map(
-                              (e) => Column(
+                              (orderDetail) => Column(
                                 children: [
                                   SizedBox(
                                     height: 80,
@@ -121,7 +119,8 @@ class OrderDetailScreen extends GetView<OrderController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomNetworkImage(
-                                          e.food!.imagePath!,
+                                          orderDetail.food!.imagePath
+                                              .toString(),
                                           width: 80,
                                           height: 80,
                                           fit: BoxFit.cover,
@@ -140,7 +139,9 @@ class OrderDetailScreen extends GetView<OrderController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(e.food!.name.toString(),
+                                              Text(
+                                                  orderDetail.food!.name
+                                                      .toString(),
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -149,7 +150,8 @@ class OrderDetailScreen extends GetView<OrderController> {
                                               Align(
                                                 alignment:
                                                     Alignment.centerRight,
-                                                child: Text('x${e.quantity}',
+                                                child: Text(
+                                                    'x${orderDetail.quantity}',
                                                     maxLines: 1,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -161,7 +163,8 @@ class OrderDetailScreen extends GetView<OrderController> {
                                                     Alignment.centerRight,
                                                 child: Text(
                                                     Formater.formatMoney(
-                                                        e.price.toString()),
+                                                        orderDetail.price
+                                                            .toString()),
                                                     maxLines: 1,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -239,73 +242,40 @@ class OrderDetailScreen extends GetView<OrderController> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // if (true)
-                //   Container(
-                //     width: Get.width / 1.2,
-                //     height: Get.height / 15,
-                //     decoration: BoxDecoration(
-                //       // gradient: const LinearGradient(
-                //       //   colors: [
-                //       //     Colors.grey,
-                //       //     Color.fromARGB(255, 221, 221, 221)
-                //       //   ],
-                //       //   begin: Alignment.topLeft,
-                //       //   end: Alignment.bottomRight,
-                //       // ),
-                //       boxShadow: [
-                //         BoxShadow(
-                //           color: Colors.grey.withOpacity(0.3),
-                //           spreadRadius: 1,
-                //           blurRadius: 7,
-                //           offset: const Offset(0, 2),
-                //         ),
-                //       ],
-                //       borderRadius: BorderRadius.circular(30),
-                //       border: Border.all(
-                //         color: Colors.grey,
-                //       ),
-                //     ),
-                //     child: TextButton(
-                //       onPressed: () {
-                //         //back
-                //       },
-                //       child: const Text('Hoàn tác đơn hàng',
-                //           style: TextStyle(fontSize: 18, color: Colors.black)),
-                //     ),
-                //   ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: Get.width / 1.2,
-                    height: Get.height / 15,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 109, 177, 121),
-                          Colors.green,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3),
+                Visibility(
+                  visible: deliverable,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: Get.width / 1.2,
+                      height: Get.height / 15,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 109, 177, 121),
+                            Colors.green,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
-                      ],
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: TextButton(
-                      onPressed: () async {
-                        bool status =
-                            await controller.completeOrderStatus(orderId);
-                        Get.off(const DeliveryScheduleScreen());
-                        // if (status) showSuccessDialog(context);
-                      },
-                      child: const Text('Xác nhận giao hàng',
-                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: TextButton(
+                        onPressed: () async {
+                          await controller.completeOrderStatus(orderId);
+                        },
+                        child: const Text('Xác nhận giao hàng',
+                            style:
+                                TextStyle(fontSize: 18, color: Colors.white)),
+                      ),
                     ),
                   ),
                 ),
@@ -348,26 +318,5 @@ class OrderDetailScreen extends GetView<OrderController> {
             ),
           );
         });
-  }
-
-  void showNotificationDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        Future.delayed(const Duration(seconds: 2), () {
-          Navigator.of(context).pop();
-        });
-        return const AlertDialog(
-          title: Row(
-            children: [
-              Icon(Icons.notifications),
-              SizedBox(width: 10),
-              Text('Notification'),
-            ],
-          ),
-          content: Text('This is a notification popup.'),
-        );
-      },
-    );
   }
 }

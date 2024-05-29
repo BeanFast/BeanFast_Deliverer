@@ -1,7 +1,7 @@
-import '/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/utils/constants.dart';
 import '/utils/logger.dart';
 import '/controllers/auth_controller.dart';
 import '/enums/auth_state_enum.dart';
@@ -28,14 +28,6 @@ class SplashScreen extends GetView<AuthController> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return waitingView();
         } else {
-          // if (snapshot.hasError) {
-          //   logger.e('snapshot.hasError');
-          //   // if (AuthState.unauthenticated) {
-
-          //   // }
-          //   return ErrorView(errorMessage: snapshot.error.toString());
-          // } else {
-          // logger.e('else');
           return Obx(() {
             switch (authState.value) {
               case AuthState.authenticated:
@@ -44,10 +36,9 @@ class SplashScreen extends GetView<AuthController> {
                 return const LoginView();
               default:
                 return const ErrorView(
-                    errorMessage: 'Lỗi xác thực đăng nhập'); //
+                    errorMessage: 'Lỗi xác thực đăng nhập');
             }
           });
-          // }
         }
       },
     );

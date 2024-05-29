@@ -1,48 +1,18 @@
-import 'package:dio/dio.dart';
-import 'package:get/get.dart' as getx;
-
-import '../utils/logger.dart';
-import '/models/food.dart';
+import '/utils/constants.dart';
 import '/models/order.dart';
-import '/services/api_service.dart';
-import 'food_service.dart';
 
 class OrderService {
   final String baseUrl = 'orders';
-  final ApiService _apiService = getx.Get.put(ApiService());
-
-  // Future<List<Order>> getByQRCode(String qrCodeString) async {
-  //   final response = await _apiService.request
-  //       .get('$baseUrl/getOrderByQrCode?qrCode=$qrCodeString');
-  //   List<Order> list = [];
-  //   logger.e(response.data['data']);
-  //   for (var e in response.data['data']) {
-  //     list.add(Order.fromJson(e));
-  //     var order = list.last;
-  //     var responseFood =
-  //         await FoodService().getById(order.orderDetails![0].foodId!);
-  //     order.orderDetails![0].food = Food.fromJson(responseFood.data['data']);
-  //   }
-  //   return list;
-  // }
 
   Future<Order> getById(String id) async {
-    final response = await _apiService.request.get('$baseUrl/$id');
-    var orderJson = response.data['data'];
-    Order order = Order.fromJson(orderJson);
-    for (var i = 0; i < order.orderDetails!.length; i++) {
-      var foodJson = orderJson["orderDetails"][i]["food"];
-      // var responseFood =
-      //     await FoodService().getById(order.orderDetails![i].foodId!);
-      order.orderDetails![i].food = Food.fromJson(foodJson);
-    }
+    final response = await apiService.request.get('$baseUrl/$id');
+    Order order = Order.fromJson(response.data['data']);
     return order;
   }
 
   Future<List<Order>> getByQrCode(String qrCode) async {
-    final response = await _apiService.request
+    final response = await apiService.request
         .get('$baseUrl/getOrderByQrCode?qrCode=$qrCode');
-    print(response);
     List<Order> list = [];
     for (var e in response.data['data']) {
       list.add(Order.fromJson(e));
@@ -50,8 +20,8 @@ class OrderService {
     return list;
   }
 
-  Future<Response> completeOrderStatus(String id) async {
-    final response = await _apiService.request.put('$baseUrl/complete/$id');
-    return response;
+  Future<bool> completeOrderStatus(String id) async {
+    final response = await apiService.request.put('$baseUrl/complete/$id');
+    return response.statusCode == 200;
   }
 }

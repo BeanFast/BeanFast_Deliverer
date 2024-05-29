@@ -1,26 +1,29 @@
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-import '/models/gift.dart';
-import '/services/gift_service.dart';
-import '/utils/logger.dart';
+import '/models/exchange_gift.dart';
+import '/services/exchange_gift_service.dart';
+import '/views/screens/delivery_schedules_screen.dart';
 
 class ExchangeGiftController extends GetxController {
-  RxBool isError = false.obs;
-  RxList<Gift> listData = <Gift>[].obs;
+ Rx<ExchangeGift?> model = Rx<ExchangeGift?>(null);
 
-  Future getData() async {
-    logger.i('getData');
+  Future getById(String id) async {
     try {
-      var response = await GiftService().getAll();
-      List<Gift> list = [];
-      for (var e in response.data['data']['items']) {
-        // logger.i(e.toString());
-        list.add(Gift.fromJson(e));
-      }
-      listData.value = list;
-      logger.i(listData.length.toString());
+      model.value = await ExchangeGiftService().getById(id);
     } catch (e) {
-      isError.value = true;
+      throw Exception(e);
+    }
+  }
+
+  Future completeOrderStatus(String id) async {
+    try {
+      await ExchangeGiftService().completeStatus(id);
+      Get.snackbar('Thông báo', 'Giao hàng thành công');
+      Get.off(const DeliveryScheduleScreen());
+    } on DioException catch (e) {
+      Get.snackbar('Thất bại', e.response!.data['message']);
     }
   }
 }
+
