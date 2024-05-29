@@ -26,6 +26,7 @@ class SessionDetail extends BaseModel {
     this.location,
     this.session,
     this.orders,
+    this.exchangeGifts,
     this.deliverer,
   }) : super(id: id, status: status);
 
@@ -45,21 +46,11 @@ class SessionDetail extends BaseModel {
         orders: json['orders']?.map<Order>((item) {
           return Order.fromJson(item);
         }).toList(),
+        exchangeGifts: json['exchangeGifts']?.map<ExchangeGift>((item) {
+          return ExchangeGift.fromJson(item);
+        }).toList(),
         deliverer: json['deliverer'] == null
             ? User()
             : User.fromJson(json['deliverer']),
       );
-
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     "accessToken": accessToken.toString(),
-  //     "id": id.toString(),
-  //     "storeId": storeId.toString(),
-  //     "name": name,
-  //     "username": userName,
-  //     "role": userRole,
-  //     "status": status,
-  //     "picUrl": picUrl ?? "",
-  //   };
-  // }
 }

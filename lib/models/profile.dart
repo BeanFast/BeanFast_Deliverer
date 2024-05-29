@@ -1,12 +1,9 @@
-import '/models/bmi.dart';
-
+import '/utils/constants.dart';
 import 'base_model.dart';
 import 'exchange_gift.dart';
 import 'order.dart';
 import 'school.dart';
 import 'user.dart';
-import 'wallet.dart';
-import 'loyaty_card.dart';
 
 class Profile extends BaseModel {
   String? userId;
@@ -21,11 +18,8 @@ class Profile extends BaseModel {
   double? currentBMI;
   User? user;
   School? school;
-  List<Bmi>? bmis;
-  List<Wallet>? wallets;
   List<Order>? orders;
   List<ExchangeGift>? exchangeGifts;
-  List<LoyaltyCard>? loyaltyCards;
 
   Profile({
     id,
@@ -41,9 +35,6 @@ class Profile extends BaseModel {
     this.className,
     this.currentBMI,
     this.school,
-    this.user,
-    this.wallets,
-    this.loyaltyCards,
   }) : super(id: id, status: status);
 
   factory Profile.fromJson(dynamic json) {
@@ -52,11 +43,6 @@ class Profile extends BaseModel {
       school = School.fromJson(json['school']);
     } else if (json['schoolName'] != null) {
       school = School(name: json['schoolName']);
-    }
-    User? user;
-    if (json['user'] != null) {
-      user = User();
-      user.fullName = json['user']['fullName'];
     }
     return Profile(
       id: json["id"],
@@ -67,31 +53,13 @@ class Profile extends BaseModel {
       fullName: json['fullName'],
       gender: json['gender'],
       nickName: json['nickName'],
-      avatarPath: json['avatarPath'],
+      avatarPath: json['avatarPath'] ?? defaultAvatarImagePath,
       dob: DateTime.parse(json['dob']),
       className: json['class'],
       currentBMI: json['currentBMI'] == null
           ? 0
           : double.parse(json['currentBMI'].toString()),
       school: school,
-      user: user,
-      // wallets: wallets.add(value) Wallet.fromJson(json['wallet']).toList(),
-      loyaltyCards: json['loyaltyCards']?.map<LoyaltyCard>((item) {
-        return LoyaltyCard.fromJson(item);
-      }).toList(),
     );
   }
-
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     "accessToken": accessToken.toString(),
-  //     "id": id.toString(),
-  //     "storeId": storeId.toString(),
-  //     "name": name,
-  //     "username": userName,
-  //     "role": userRole,
-  //     "status": status,
-  //     "picUrl": picUrl ?? "",
-  //   };
-  // }
 }

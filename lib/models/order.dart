@@ -3,7 +3,6 @@ import 'order_activity.dart';
 import 'order_detail.dart';
 import 'profile.dart';
 import 'session_detail.dart';
-import 'transaction.dart';
 
 class Order extends BaseModel {
   String? sessionDetailId;
@@ -17,7 +16,6 @@ class Order extends BaseModel {
   SessionDetail? sessionDetail;
   Profile? profile;
   List<OrderDetail>? orderDetails;
-  List<Transaction>? transactions;
   List<OrderActivity>? orderActivities;
 
   Order({
@@ -34,7 +32,6 @@ class Order extends BaseModel {
     this.sessionDetail,
     this.profile,
     this.orderDetails,
-    this.transactions,
     this.orderActivities,
   }) : super(id: id, status: status);
 
