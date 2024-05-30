@@ -1,11 +1,12 @@
 import 'package:beanfast_deliverer/models/exchange_gift.dart';
+import 'package:beanfast_deliverer/utils/formater.dart';
 import 'package:beanfast_deliverer/views/screens/exchange_gift_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '/models/order.dart';
-import '/utils/formater.dart';
+
 import 'data_screen.dart';
 import 'order_detail_screen.dart';
 
@@ -65,7 +66,7 @@ class OrderDeliveryListScreen extends StatelessWidget {
                                 Text(
                                     'Số sản phẩm: ${order.orderDetails!.length}'),
                                 Text(
-                                    'Tổng giá: ${Formater.formatMoney(order.totalPrice.toString())}'),
+                                    'Tổng giá: ${Formatter.formatMoney(order.totalPrice.toString())}'),
                               ],
                             ),
                             trailing: const Icon(
@@ -112,7 +113,7 @@ class OrderDeliveryListScreen extends StatelessWidget {
                                 const Text(
                                     'Số sản phẩm: 1'),
                                 Text(
-                                    'Tổng điểm: ${Formater.formatMoney(exchangeGift.points.toString())}'),
+                                    'Tổng điểm: ${Formatter.formatMoney(exchangeGift.points.toString())}'),
                               ],
                             ),
                             

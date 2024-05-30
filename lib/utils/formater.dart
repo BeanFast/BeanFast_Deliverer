@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class Formater {
+class Formatter {
   static String formatMoney(String value) {
     String result = value.split('.')[0];
     final f = NumberFormat("#,###", "vi_VN");
