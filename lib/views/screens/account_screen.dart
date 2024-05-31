@@ -192,7 +192,7 @@ class AccountScreen extends GetView<AuthController> {
                             },
                           ),
                           SettingItem(
-                            title: "Trung tam Trợ giúp",
+                            title: "Trung tâm Trợ giúp",
                             icon: Ionicons.earth,
                             iconColor: Colors.black,
                             onTap: () {
