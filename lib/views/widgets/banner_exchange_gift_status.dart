@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import '/models/exchange_gift.dart';
 import '/enums/status_enum.dart';
 
-
 class BannerExchangeGiftStatus extends StatelessWidget {
   final ExchangeGift exchangeGift;
   const BannerExchangeGiftStatus({super.key, required this.exchangeGift});
 
   @override
   Widget build(BuildContext context) {
-    ExchangeGiftStatus status = ExchangeGiftStatus.fromInt(exchangeGift.status!);
+    ExchangeGiftStatus status =
+        ExchangeGiftStatus.fromInt(exchangeGift.status!);
     Text text = const Text('');
     Icon icon = const Icon(
       Iconsax.truck_fast,
@@ -23,7 +23,7 @@ class BannerExchangeGiftStatus extends StatelessWidget {
       case ExchangeGiftStatus.preparing:
         {
           text = const Text(
-            'Đơn hàng của bạn đang được chuẩn bị',
+            'Đơn hàng đang được chuẩn bị.',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           );
           icon = const Icon(Iconsax.box_time, color: Colors.white, size: 60);
@@ -31,10 +31,11 @@ class BannerExchangeGiftStatus extends StatelessWidget {
         // color = Colors.grey[300]!;
 
         break;
+
       case ExchangeGiftStatus.delivering:
         {
           text = Text(
-            'Đơn hàng sẽ được giao vào lúc ${DateFormat('hh:mm').format(exchangeGift.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('hh:mm dd/MM/yy').format(exchangeGift.sessionDetail!.session!.deliveryEndTime!)}. Vui lòng kiểm tra trước khi nhận hàng',
+            'Đơn hàng sẽ giao vào lúc ${DateFormat('HH:mm').format(exchangeGift.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('HH:mm dd/MM/yy').format(exchangeGift.sessionDetail!.session!.deliveryEndTime!)}. Vui lòng kiểm tra trước khi giao hàng',
             style: const TextStyle(
               color: Colors.white,
             ),
@@ -51,7 +52,7 @@ class BannerExchangeGiftStatus extends StatelessWidget {
       case ExchangeGiftStatus.completed:
         {
           text = const Text(
-            'Cảm ơn bạn chọn BeanFast!',
+            'Đơn hàng đã được giao thành công',
             style: TextStyle(
               color: Colors.white,
             ),
@@ -63,7 +64,7 @@ class BannerExchangeGiftStatus extends StatelessWidget {
       case ExchangeGiftStatus.cancelled:
         {
           text = const Text(
-            'Đơn hàng đã bị huỷ. Vui lòng liên hệ với chúng tôi để biết thêm chi tiết.',
+            'Đơn hàng đã bị huỷ.',
             style: TextStyle(
               color: Colors.white,
             ),

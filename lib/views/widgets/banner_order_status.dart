@@ -30,10 +30,21 @@ class BannerOrderStatus extends StatelessWidget {
         // color = Colors.grey[300]!;
 
         break;
+      case OrderStatus.cooking:
+        {
+          text = const Text(
+            'Đơn hàng đang được chế biến',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          );
+          icon = const Icon(Iconsax.box_time, color: Colors.white, size: 60);
+        }
+        // color = Colors.grey[300]!;
+
+        break;
       case OrderStatus.delivering:
         {
           text = Text(
-            'Đơn hàng sẽ được giao vào lúc ${DateFormat('hh:mm').format(order.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('hh:mm dd/MM/yy').format(order.sessionDetail!.session!.deliveryEndTime!)}. Vui lòng kiểm tra trước khi giao hàng',
+            'Đơn hàng sẽ giao vào lúc ${DateFormat('hh:mm').format(order.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('hh:mm dd/MM/yy').format(order.sessionDetail!.session!.deliveryEndTime!)}. Vui lòng kiểm tra trước khi giao hàng',
             style: const TextStyle(
               color: Colors.white,
             ),
@@ -50,7 +61,7 @@ class BannerOrderStatus extends StatelessWidget {
       case OrderStatus.completed:
         {
           text = const Text(
-            'Đơn hàng đã hoàn thành!',
+            'Đơn hàng đã được giao thành công',
             style: TextStyle(
               color: Colors.white,
             ),

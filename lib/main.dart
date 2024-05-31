@@ -1,3 +1,4 @@
+import 'package:beanfast_deliverer/views/screens/network_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,6 @@ import 'package:get_storage/get_storage.dart';
 
 import 'binding.dart';
 import 'contrains/theme.dart';
-import 'views/screens/splash_screen.dart';
 
 Future<void> main() async {
   await GetStorage.init(); // init local storage
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
-          page: () => const SplashScreen(),
+          page: () => const NetworkScreen(),
           binding: AuthBindingController(),
           // transition: Transition.fade,
         )

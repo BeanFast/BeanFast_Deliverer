@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:beanfast_deliverer/utils/formater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,7 +11,7 @@ import '/contrains/theme_color.dart';
 import '/controllers/exchange_gift_controller.dart';
 import '/views/widgets/banner_exchange_gift_status.dart';
 import '/views/widgets/image_default.dart';
-import '/utils/formater.dart';
+
 import 'data_screen.dart';
 import 'loading_screen.dart';
 
@@ -23,7 +26,7 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
     Get.put(ExchangeGiftController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chi tiết đơn hàng'),
+        title: const Text('Chi tiết đơn quà'),
       ),
       body: LoadingScreen(
         future: () => controller.getById(exchangeGiftId),
@@ -42,27 +45,28 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                     color: ThemeColor.itemColor,
                     padding: const EdgeInsets.all(10),
                     child: GestureDetector(
-                      onTap: () {
-                        // Get.to( () => OrderTimeline(
-                        //   order: controller.model.value,
-                        // ));
-                      },
+                      onTap: () {},
                       child: Container(
                         color: ThemeColor.itemColor,
                         child: Column(
                           children: [
                             ListTile(
                               leading: const Icon(Iconsax.location),
-                              title: const Text('Địa chỉ nhận hàng'),
+                              title: Text('Địa chỉ giao hàng' ,
+                                  style: Get.textTheme.titleMedium),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(controller.model.value!.sessionDetail!
-                                      .location!.school!.name
-                                      .toString()),
-                                  Text(controller.model.value!.sessionDetail!
-                                      .location!.name
-                                      .toString()),
+                                  Text(
+                                      controller.model.value!.sessionDetail!
+                                          .location!.school!.name
+                                          .toString(),
+                                      style: Get.textTheme.bodyMedium),
+                                  Text(
+                                      controller.model.value!.sessionDetail!
+                                          .location!.name
+                                          .toString(),
+                                      style: Get.textTheme.bodyMedium),
                                 ],
                               ),
                             ),
@@ -75,14 +79,14 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                                     null)
                               ListTile(
                                 leading: const Icon(Iconsax.truck_time),
-                                title: Text('Thời gian nhận hàng',
-                                    style: Get.textTheme.bodyMedium),
+                                title: Text('Thời gian giao hàng',
+                                    style: Get.textTheme.titleMedium),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                         "Từ ${DateFormat('HH:mm').format(controller.model.value!.sessionDetail!.session!.deliveryStartTime!)} đến ${DateFormat('HH:mm, dd/MM/yy').format(controller.model.value!.sessionDetail!.session!.deliveryEndTime!)}",
-                                        style: Get.textTheme.bodyMedium),
+                                        style: Get.textTheme.bodySmall),
                                   ],
                                 ),
                               ),
@@ -147,7 +151,7 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: Text(
-                                            Formater.formatPoint(
+                                            Formatter.formatPoint(
                                               controller.model.value!.points
                                                   .toString(),
                                             ),
@@ -183,7 +187,7 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                                   style: Get.textTheme.bodySmall,
                                 ),
                                 Text(
-                                  Formater.formatPoint(controller
+                                  Formatter.formatPoint(controller
                                       .model.value!.points
                                       .toString()),
                                   style: Get.textTheme.bodySmall!.copyWith(
@@ -231,7 +235,7 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                             Text('Thời gian đặt hàng',
                                 style: Get.textTheme.bodyMedium),
                             Text(
-                                DateFormat('hh:mm dd/MM/yy').format(
+                                DateFormat('HH:mm dd/MM/yy').format(
                                     controller.model.value!.paymentDate!),
                                 style: Get.textTheme.bodySmall),
                           ],
@@ -246,7 +250,7 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                       alignment: Alignment.center,
                       child: Container(
                         width: Get.width / 1.2,
-                        height: Get.height / 15,
+                        height: 45,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             colors: [
@@ -271,9 +275,12 @@ class ExchangeGiftDetailScreen extends GetView<ExchangeGiftController> {
                             await controller
                                 .completeOrderStatus(exchangeGiftId);
                           },
-                          child: const Text('Xác nhận giao hàng',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
+                          child: Text(
+                            'Xác nhận giao hàng',
+                            style: Get.textTheme.titleMedium!.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),

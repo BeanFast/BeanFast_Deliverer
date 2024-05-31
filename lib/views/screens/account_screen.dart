@@ -114,7 +114,10 @@ class AccountScreen extends GetView<AuthController> {
                                                 height: 40,
                                                 width: innerWidth / 2 - 5,
                                                 child: ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Get.snackbar('Hệ thống',
+                                                        'Đang phát triển');
+                                                  },
                                                   style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
@@ -181,16 +184,20 @@ class AccountScreen extends GetView<AuthController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SettingItem(
-                            title: "Nút số 1",
+                            title: "Dịch vụ & Hợp đồng",
                             icon: Ionicons.earth,
                             iconColor: Colors.black,
-                            onTap: () {},
+                            onTap: () {
+                              Get.snackbar('Hệ thống', 'Đang phát triển');
+                            },
                           ),
                           SettingItem(
-                            title: "Nút số 2",
+                            title: "Trung tâm Trợ giúp",
                             icon: Ionicons.earth,
                             iconColor: Colors.black,
-                            onTap: () {},
+                            onTap: () {
+                              Get.snackbar('Hệ thống', 'Đang phát triển');
+                            },
                           ),
                         ],
                       ),
@@ -211,7 +218,9 @@ class AccountScreen extends GetView<AuthController> {
                             icon: Ionicons.earth,
                             iconColor: Colors.black,
                             value: "Tiếng việt",
-                            onTap: () {},
+                            onTap: () {
+                              Get.snackbar('Hệ thống', 'Tiếng việt');
+                            },
                           ),
                         ],
                       ),
