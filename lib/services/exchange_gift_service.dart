@@ -11,8 +11,8 @@ class ExchangeGiftService {
   }
 
   Future<List<ExchangeGift>> getByQrCode(String qrCode) async {
-    final response = await apiService.request
-        .get('$baseUrl/getOrderByQrCode?qrCode=$qrCode');
+    final response = await apiService.request.get('$baseUrl/getExchangeGiftByQrCode',
+        queryParameters: Map.from({"qrCode": qrCode}));
     List<ExchangeGift> list = [];
     for (var e in response.data['data']) {
       list.add(ExchangeGift.fromJson(e));

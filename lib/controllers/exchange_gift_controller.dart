@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
+import '/views/screens/splash_screen.dart';
 import '/models/exchange_gift.dart';
 import '/services/exchange_gift_service.dart';
-import '/views/screens/delivery_schedules_screen.dart';
 
 class ExchangeGiftController extends GetxController {
  Rx<ExchangeGift?> model = Rx<ExchangeGift?>(null);
@@ -20,7 +20,7 @@ class ExchangeGiftController extends GetxController {
     try {
       await ExchangeGiftService().completeStatus(id);
       Get.snackbar('Thông báo', 'Giao hàng thành công');
-      Get.off(const DeliveryScheduleScreen());
+      Get.offAll(const SplashScreen());
     } on DioException catch (e) {
       Get.snackbar('Thất bại', e.response!.data['message']);
     }

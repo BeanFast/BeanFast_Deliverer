@@ -8,31 +8,29 @@ import '/services/order_service.dart';
 import '/views/screens/order_delivery_list.dart';
 import '/models/order.dart';
 import '/services/exchange_gift_service.dart';
-import '/utils/logger.dart';
 
 class QRScanController extends GetxController {
-  var qrData = Rx<String?>(null);
   final qrKey = GlobalKey(debugLabel: 'QR');
 
   void onQRViewCreated(QRViewController controller) {
-    qrData.value = null;
+    String qrData;
+
     controller.scannedDataStream.listen((scanData) async {
+      List<Order> orderlist = [];
+      List<ExchangeGift> exchangeGiftlist = [];
       if (scanData.code != null) {
-        qrData.value = scanData.code ?? '';
-        logger.e('qrData - ${qrData.value}');
-        List<Order> orderlist = [];
-        List<ExchangeGift> exchangeGiftlist = [];
+        qrData = scanData.code ?? '';
         try {
-          orderlist = await OrderService().getByQrCode(qrData.value!);
+          orderlist = await OrderService().getByQrCode(qrData);
         } on DioException catch (e) {
           e.response!.data['message'];
         }
         try {
-          exchangeGiftlist =
-              await ExchangeGiftService().getByQrCode(qrData.value!);
+          exchangeGiftlist = await ExchangeGiftService().getByQrCode(qrData);
         } on DioException catch (e) {
           e.response!.data['message'];
         }
+        Get.back();
         Get.to(OrderDeliveryListScreen(
           orderList: orderlist,
           exchangeGiftList: exchangeGiftlist,

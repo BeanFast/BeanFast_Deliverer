@@ -11,8 +11,8 @@ class OrderService {
   }
 
   Future<List<Order>> getByQrCode(String qrCode) async {
-    final response = await apiService.request
-        .get('$baseUrl/getOrderByQrCode?qrCode=$qrCode');
+    final response = await apiService.request.get('$baseUrl/getOrderByQrCode',
+        queryParameters: Map.from({"qrCode": qrCode}));
     List<Order> list = [];
     for (var e in response.data['data']) {
       list.add(Order.fromJson(e));

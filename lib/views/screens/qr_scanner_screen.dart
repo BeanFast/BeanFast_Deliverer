@@ -37,16 +37,12 @@ class QRScanScreen extends GetView<QRScanController> {
             child: Container(
               height: 70,
               color: Colors.white,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Obx(
-                    () => Text('QR Data: ${controller.qrData.value}',
-                        textAlign: TextAlign.center),
-                  ),
-                  const Icon(Icons.qr_code_scanner, size: 30),
-                  const Text('Đang quét mã QR...'),
+                  Icon(Icons.qr_code_scanner, size: 30),
+                  Text('Đang quét mã QR...'),
                 ],
               ),
             ),
