@@ -17,7 +17,6 @@ class QRScanScreen extends GetView<QRScanController> {
       body: Stack(
         children: <Widget>[
           Positioned.fill(
-            bottom: 70,
             child: QRView(
               key: controller.qrKey,
               onQRViewCreated: controller.onQRViewCreated,
@@ -30,23 +29,23 @@ class QRScanScreen extends GetView<QRScanController> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 70,
-              color: Colors.white,
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.qr_code_scanner, size: 30),
-                  Text('Đang quét mã QR...'),
-                ],
-              ),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 0,
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     height: 70,
+          //     color: Colors.white,
+          //     child: const Column(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Icon(Icons.qr_code_scanner, size: 30),
+          //         Text('Đang quét mã QR...'),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
